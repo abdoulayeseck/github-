@@ -15,26 +15,28 @@
  
  app.get('/Logement', function(request, response){
  
-   fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&rows=2&facet=code_region&facet=region&facet=annee_financement")
+   fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&facet=code_region&facet=region&facet=annee_financement")
        .then(res => res.json())
-       .then(json => { 
+       .then(json => {
+
+        var region = {};
+
          var construction = [];
-         var region = {}
-         
+        console.log("length", json.records.length);
          for (let i = 0; i< json.records.length;i++){
- 
-           construction.push({
-             region:json.records[i].fields.region,
-             rehabilitation_prixderevient_m2:json.records[i].fields.rehabilitation_prixderevient_m2,
-             construction_prixderevient_m2: json.records[i].fields.construction_prixderevient_m2,
-             rehabilitation_prixderevient_logement: json.records[i].fields.rehabilitation_prixderevient_logement,
-             construction_surface_moy_m2_su: json.records[i].fields.construction_surface_moy_m2_su,
-             annee_financement: json.records[i].fields.annee_financement,
-             rehabilitation_surface_moy_m2_su: json.records[i].fields.rehabilitation_surface_moy_m2_su,
-             construction_prixderevient_logement: json.records[i].fields.construction_prixderevient_logement
-           });
- 
-         
+
+          construction.push({
+
+          nom_region: json.records[i].fields.region,
+          rehabilitation_prixderevient_m2:json.records[i].fields.rehabilitation_prixderevient_m2,
+          construction_prixderevient_m2: json.records[i].fields.construction_prixderevient_m2,
+          rehabilitation_prixderevient_logement: json.records[i].fields.rehabilitation_prixderevient_logement,
+          construction_surface_moy_m2_su: json.records[i].fields.construction_surface_moy_m2_su,
+          annee_financement: json.records[i].fields.annee_financement,
+          rehabilitation_surface_moy_m2_su: json.records[i].fields.rehabilitation_surface_moy_m2_su,
+          construction_prixderevient_logement: json.records[i].fields.construction_prixderevient_logement
+
+          });
            
          }
         
@@ -53,7 +55,7 @@
    const code = request.params.region;
  
    
-   fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&rows=2&facet=code_region&facet=region&facet=annee_financement")
+   fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&facet=code_region&facet=region&facet=annee_financement")
        .then(res => res.json())
        .then(json => { 
          var construction = [];
@@ -119,7 +121,7 @@
  // serveur
  
  
- // 2 eme fichier 
+ // 2eme fichier 
  app.get('Logement/sociaux', function(request, response){
  
    
@@ -131,7 +133,7 @@
              for (let i = 0; i< json.records.length;i++){
                arret.push({
                  nom_region:json.records[i].fields.region,
-                 nbre_logements_re: json.records[i].fields.nbre_logements
+                 nbre_logements_re: json.records[i].fields.nbre_logements,
                });
                
              }
