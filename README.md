@@ -45,6 +45,20 @@ Il contient 13 colonnes :
 - part_logement_sociaux_geresautres_bailleurs est la part de logements sociaux gérés par les autres bailleurs
 
 
+
+Le second fichier xlsx obtenu à partir du lien https://www.insee.fr/fr/statistiques/5371235?sommaire=5371304 s'agit du niveau de vie et de pauvreté par région en 2018 communiqué par l'INSEE ainsi que les coordonnées géographiques récupérées de https://www.coordonnees-gps.fr/carte/pays/FR. Il comprend diverses colonnes :
+
+- regions est le libellé de la région
+
+- Les niveaux de vie annuels en euros
+
+- taux de pauvreté est le taux de pauvreté par régions en %
+
+- intensité de pauvreté est l'intensité de la pauvreté en % au sein de la région
+
+- latitude et longitude sont les coordonnées géographiques pour le centre de la région (l'idée était de créer une carte avec les informations du taux de pauvreté et le nombre de logements sociaux par régions avec Power BI)
+
+
 Idées :
 
 -> Récupérer et Afficher le top 5 ou top 3 des prix minimums des logements sociaux
