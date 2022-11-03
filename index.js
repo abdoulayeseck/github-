@@ -22,13 +22,13 @@
         var region = {};
 
          var construction = [];
-        console.log("length", json.records.length);
+		 
          for (let i = 0; i< json.records.length;i++){
 
           construction.push({
 
           nom_region: json.records[i].fields.region,
-          rehabilitation_prixderevient_m2:json.records[i].fields.rehabilitation_prixderevient_m2,
+          rehabilitation_prix_derevient_m2:json.records[i].fields.rehabilitation_prixderevient_m2,
           construction_prixderevient_m2: json.records[i].fields.construction_prixderevient_m2,
           rehabilitation_prixderevient_logement: json.records[i].fields.rehabilitation_prixderevient_logement,
           construction_surface_moy_m2_su: json.records[i].fields.construction_surface_moy_m2_su,
@@ -88,22 +88,31 @@
  
  
  // obtenir le prix maximal au metre carre 
- 
- app.get('/Prix_max', function(request, response){
+ /*
+ app.get('/Prix_min_max', function(request, response){
  
    const code = request.params.region;
  
    
-   fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&rows=2&facet=code_region&facet=region&facet=annee_financement")
+   fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&facet=code_region&facet=region&facet=annee_financement")
        .then(res => res.json())
        .then(json => { 
          var construction = [];
-         
-         
-         for (let i = 0; i< json.records.length-1;i++){
- 
+         var  j =0;
+		 max = json.records[0].fields.rehabilitation_prixderevient_m2;
+         for (let i = 0; i< json.records.length;i++){
+			 valeur = json.records[i].fields.rehabilitation_prixderevient_m2;
+			 if(valeur > max){
+				 max = valeur;
+				 j = i;
+			 }
+			 console.log("i vaut ",i);
+			 console.log("j vaut ",j);
              construction.push({
-             rehabilitation_prixderevient_m2:Math.max(json.records[i].fields.rehabilitation_prixderevient_m2)
+				
+				region:json.records[j].fields.region,
+				rehabilitation_prixderevient_m2_max:json.records[j].fields.rehabilitation_prixderevient_m2
+				
  
            });
  
@@ -111,45 +120,41 @@
            
          }
         
-         response.json(construction);
+         response.json(json);
  
        }); 
  
  })
- 
+ */
 
  // serveur
  
  
  // 2eme fichier 
- app.get('Logement/sociaux', function(request, response){
- 
+ app.get('/nombre_logement', function(request, response){
    
-       fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=bailleurs_sociaux_dep&q=&lang=fr&rows=250&start=0&facet=code_region&facet=region&facet=code_departement&facet=libelle_departement&facet=annee&timezone=Europe%2Fparis")
+       fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=bailleurs_sociaux_dep&q=&facet=code_region&facet=region&facet=code_departement&facet=libelle_departement&facet=annee")
            .then(res => res.json())
            .then(json => { 
              var arret = [];
-             
+			 
+			 
+             console.log(json.records.length)
              for (let i = 0; i< json.records.length;i++){
                arret.push({
                  nom_region:json.records[i].fields.region,
-                 nbre_logements_re: json.records[i].fields.nbre_logements,
+				 libelle_departement:json.records[i].fields.libelle_departement,
+                 nbre_logements_re: json.records[i].fields.nbre_logements
                });
-               
              }
-             //arret[1].fields
-             //var arret2 = [];
-             //for (let j = 0; j< arret.length;j++){
-               //console.log("arret " + j , arret[j]);
-               //arret2.push(arret[j].fields);
-               
-             //}
              response.json(arret);
    
            });
            
    
    })
+   
+   
  
  app.listen(PORT,()=>{
      console.log('serveur en marche ');
