@@ -1,0 +1,83 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "SOLIDARITE",
+      "description": "Ce API a bout but de donner des informations sur les offres de logement sociales en france",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Information sociale",
+      "description": "API sur les logements sociales en france"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+
+    "paths": {
+        "/Logement": {
+          "get": {
+            "tags": ["Logement"],
+            "summary": "Renseigne le nombre de logement sociale par region",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/Logement"
+                }
+              }
+            }
+          }
+        },
+        "/Logement/:region": {
+            "get": {
+              "tags": ["Logement/:region"],
+              "summary": "Renseigne les offre de logement sociales en fonction de la region souhaite",
+              "responses": {
+                "300": {
+                  "description": "OKK",
+                  "schema": {
+                    "$ref": "#/definitions/Logement/:region"
+                  }
+                }
+              }
+            }
+          },
+          "/Prix_max": {
+            "get": {
+              "tags": ["Prix_max"],
+              "summary": "Renseigne le prix maximum d'offre de logement sociales",
+              "responses": {
+                "300": {
+                  "description": "OKK",
+                  "schema": {
+                    "$ref": "#/definitions/Prix_max"
+                  }
+                }
+              }
+            }
+          },
+          "/nombre_logement": {
+            "get": {
+              "tags": ["nombre_logement"],
+              "summary": "Renseigne le nombre de logement sociale par region",
+              "responses": {
+                "300": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/nombre_logement"
+                  }
+                }
+              }
+            }
+          }
+
+    }
+}

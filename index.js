@@ -1,7 +1,9 @@
-
  // importer le module
  const express = require('express');
  const app = express();
+ const fetch =require('node-fetch');
+ const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
  const PORT = process.env.PORT || 3000;
  const axios = require('axios').default;
  
@@ -149,7 +151,8 @@
            
    
    })
-   
+
+app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
    
  
  app.listen(PORT,()=>{
