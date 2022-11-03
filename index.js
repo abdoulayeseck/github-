@@ -15,7 +15,7 @@
  
  app.get('/Logement', function(request, response){
  
-   fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&facet=code_region&facet=region&facet=annee_financement")
+   fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&rows=100&facet=code_region&facet=region&facet=annee_financement")
        .then(res => res.json())
        .then(json => {
 
@@ -55,7 +55,7 @@
    const code = request.params.region;
  
    
-   fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&facet=code_region&facet=region&facet=annee_financement")
+   fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&rows=100&facet=code_region&facet=region&facet=annee_financement")
        .then(res => res.json())
        .then(json => { 
          var construction = [];
@@ -87,45 +87,41 @@
  
  
  
- // obtenir le prix maximal au metre carre 
- /*
- app.get('/Prix_min_max', function(request, response){
+ // la region ayant le prix de rehabilitation maximale au m2
+ 
+ app.get('/Prix_max', function(request, response){
  
    const code = request.params.region;
  
-   
-   fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&facet=code_region&facet=region&facet=annee_financement")
+   fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&rows=100&facet=code_region&facet=region&facet=annee_financement")
        .then(res => res.json())
        .then(json => { 
-         var construction = [];
-         var  j =0;
-		 max = json.records[0].fields.rehabilitation_prixderevient_m2;
-         for (let i = 0; i< json.records.length;i++){
-			 valeur = json.records[i].fields.rehabilitation_prixderevient_m2;
-			 if(valeur > max){
-				 max = valeur;
-				 j = i;
-			 }
-			 console.log("i vaut ",i);
-			 console.log("j vaut ",j);
-             construction.push({
-				
-				region:json.records[j].fields.region,
-				rehabilitation_prixderevient_m2_max:json.records[j].fields.rehabilitation_prixderevient_m2
-				
- 
-           });
- 
-           
+        var construction = [];
+        var  j =0;
+		    max = json.records[0].fields.rehabilitation_prixderevient_m2;
+         for (let i = 1; i< json.records.length;i++){
+  			   valeur = json.records[i].fields.rehabilitation_prixderevient_m2;
+  			   if(valeur > max){
+  				 max = valeur;
+  				 j = i;
+			  }
            
          }
+
+        construction.push({
+        region:json.records[j].fields.region,
+        annee_financement: json.records[j].fields.annee_financement,
+        rehabilitation_prixderevient_m2_max:json.records[j].fields.rehabilitation_prixderevient_m2,
+        construction_prixderevient_m2:json.records[j].fields.construction_prixderevient_m2,
         
-         response.json(json);
+           });
+        
+         response.json(construction);
  
        }); 
  
  })
- */
+ 
 
  // serveur
  
@@ -133,7 +129,7 @@
  // 2eme fichier 
  app.get('/nombre_logement', function(request, response){
    
-       fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=bailleurs_sociaux_dep&q=&facet=code_region&facet=region&facet=code_departement&facet=libelle_departement&facet=annee")
+       fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=bailleurs_sociaux_dep&q=&rows=100&facet=code_region&facet=region&facet=code_departement&facet=libelle_departement&facet=annee")
            .then(res => res.json())
            .then(json => { 
              var arret = [];
@@ -143,7 +139,7 @@
              for (let i = 0; i< json.records.length;i++){
                arret.push({
                  nom_region:json.records[i].fields.region,
-				 libelle_departement:json.records[i].fields.libelle_departement,
+				         libelle_departement:json.records[i].fields.libelle_departement,
                  nbre_logements_re: json.records[i].fields.nbre_logements
                });
              }
