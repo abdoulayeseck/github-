@@ -1,21 +1,21 @@
  // importer le module
- const express = require('express');
- const app = express();
- const fetch =require('node-fetch');
- const swaggerUi = require('swagger-ui-express');
+const express = require('express');
+const app = express();
+const fetch =require('node-fetch');
+const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
- const PORT = process.env.PORT || 3000;
- const axios = require('axios').default;
+const PORT = process.env.PORT || 3000;
+const axios = require('axios').default;
  
  
  
- app.get('/', (req,res) => {
+app.get('/', (req,res) => {
      res.json({test : "Bienvenue a l'application des Logements Sociaux"});
  })
  
  // Fournir toutes les informations 
  
- app.get('/Logement', function(request, response){
+app.get('/Logement', function(request, response){
  
    fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=constructionrehabilitation_logementsocial_surface_prix&q=&rows=100&facet=code_region&facet=region&facet=annee_financement")
        .then(res => res.json())
@@ -46,13 +46,13 @@ const swaggerDocument = require('./swagger.json');
  
        }); 
  
- })
+})
  
  
  
  // Fournir l'ensemble toutes les informations d'une regions
  
- app.get('/Logement/:region', function(request, response){
+app.get('/Logement/:region', function(request, response){
  
    const code = request.params.region;
  
@@ -85,13 +85,13 @@ const swaggerDocument = require('./swagger.json');
  
        }); 
  
- })
+})
  
  
  
  // la region ayant le prix de rehabilitation maximale au m2
  
- app.get('/Prix_max', function(request, response){
+app.get('/Prix_max', function(request, response){
  
    const code = request.params.region;
  
@@ -122,14 +122,14 @@ const swaggerDocument = require('./swagger.json');
  
        }); 
  
- })
+})
  
 
  // serveur
  
  
  // 2eme fichier 
- app.get('/nombre_logement', function(request, response){
+app.get('/nombre_logement', function(request, response){
    
        fetch("https://opendata.caissedesdepots.fr/api/records/1.0/search/?dataset=bailleurs_sociaux_dep&q=&rows=100&facet=code_region&facet=region&facet=code_departement&facet=libelle_departement&facet=annee")
            .then(res => res.json())
@@ -151,11 +151,10 @@ const swaggerDocument = require('./swagger.json');
            
    
    })
-
 app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
    
  
- app.listen(PORT,()=>{
+app.listen(PORT,()=>{
      console.log('serveur en marche ');
  })
  

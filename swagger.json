@@ -79,5 +79,103 @@
             }
           }
 
+    },
+
+    
+    "definitions": {
+      "Recolte": {
+        "required": ["association", "addresse", "telephone"],
+        "properties": {
+          "association": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "addresse": {
+            "type": "string"
+          },
+          "books": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "association": {
+                  "type": "string"
+                },
+                "telephone": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "telephone": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      
+      "arrets": {
+        "required": ["nom_arret", "coordonnees_geo"],
+        "properties": {
+          "nom_arret": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "books": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nom_arret": {
+                  "type": "string"
+                },
+                "coordonnees_geo": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "coordonnees_geo": {
+            "type": "array",
+            "items": {
+              "type": "array"
+            }
+          }
+        }
+      },
+
+      "temporaire": {
+        "required": ["nom_hotel", "adresses","telephone"],
+        "properties": {
+          "nom_hotel": {
+            "type": "string"
+          },
+          "books": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nom_hotel": {
+                  "type": "string"
+                },
+                "adresses": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "telephone": {
+            "type": "number"
+            
+          }
+        }
+      }
     }
+
 }
