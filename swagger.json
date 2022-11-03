@@ -83,96 +83,88 @@
 
     
     "definitions": {
-      "Recolte": {
-        "required": ["association", "addresse", "telephone"],
+      "Logement": {
+        "required": [  "nom_region",
+        "rehabilitation_prix_derevient_m2",
+        "construction_prixderevient_m2",
+        "rehabilitation_prixderevient_logement",
+        "construction_surface_moy_m2_su",
+        "annee_financement",
+        "rehabilitation_surface_moy_m2_su",
+        "construction_prixderevient_logement"],
         "properties": {
-          "association": {
+          "nom_region": {
             "type": "string"
           },
-          "isPublic": {
-            "type": "boolean"
+          "construction_prixderevient_m2": {
+            "type": "number"
           },
-          "addresse": {
-            "type": "string"
-          },
-          "books": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "association": {
-                  "type": "string"
-                },
-                "telephone": {
-                  "type": "number"
-                }
-              }
-            }
-          },
-          "telephone": {
-            "type": "array",
-            "items": {
-              "type": "number"
-            }
+          "construction_prixderevient_logement": {
+            "type": "number"
           }
         }
       },
       
-      "arrets": {
-        "required": ["nom_arret", "coordonnees_geo"],
+      "Logement/:region": {
+        "required": ["nom_region",
+        "rehabilitation_prix_derevient_m2",
+        "construction_prixderevient_m2",
+        "rehabilitation_prixderevient_logement",
+        "construction_surface_moy_m2_su",
+        "annee_financement",
+        "rehabilitation_surface_moy_m2_su",
+        "construction_prixderevient_logement"],
+        "params":["nom_region"],
         "properties": {
-          "nom_arret": {
+          "nom_region": {
             "type": "string"
           },
-          "isPublic": {
-            "type": "boolean"
+          "construction_prixderevient_m2": {
+            "type": "number"
           },
-          "books": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "nom_arret": {
-                  "type": "string"
-                },
-                "coordonnees_geo": {
-                  "type": "number"
-                }
-              }
-            }
-          },
-          "coordonnees_geo": {
-            "type": "array",
-            "items": {
-              "type": "array"
-            }
+          "construction_prixderevient_logement": {
+            "type": "number"
           }
         }
       },
 
-      "temporaire": {
-        "required": ["nom_hotel", "adresses","telephone"],
+      "Prix_max": {
+        "required": [
+          "region",
+          "annee_financement",
+          "rehabilitation_prixderevient_m2_max",
+          "construction_prixderevient_m2"
+        ],
         "properties": {
-          "nom_hotel": {
+          "region": {
             "type": "string"
           },
-          "books": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "nom_hotel": {
-                  "type": "string"
-                },
-                "adresses": {
-                  "type": "string"
-                }
-              }
-            }
+          "annee_financement": {
+            "type": "string"
           },
-          "telephone": {
+          "rehabilitation_prixderevient_m2_max": {
             "type": "number"
-            
+          },
+          "construction_prixderevient_m2_max": {
+            "type": "number"
+          }
+        }
+      },
+      "nombre_logement": {
+        "required": [
+          "nom_region",
+          "libelle_departement",
+          "nbre_logements_re"
+        ],
+        "properties": {
+          "region": {
+            "type": "string"
+          },
+          "libelle_departement": {
+            "type": "string"
+          },
+          "nbre_logements_re": {
+            "type": "number"
           }
         }
       }
