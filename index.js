@@ -177,8 +177,12 @@
    
    DBASE.run(sql,params,function(err,result){
 	if(err) console.log("error", err);
-	else res.send(`${this.lastID}`);
+	else res.send(user);
      });
+	 
+	 
+	 
+	 
      
      })
     
@@ -210,26 +214,48 @@ app.get("/api/user/:id",(req,res)=>{
 
 
     
-  // Afficher un user avec la region
+  // Afficher les avis d'une région
 
 app.get("/api/:region",(req,res)=>{
 	const {region:userR}=req.params
-	const sql= "SELECT a FROM user group by region having region = ?"
-	console.log(sql);
+	const sql= "SELECT avis FROM user WHERE region = ?"
+	//console.log(sql);
 	const params=[userR]
-	DBASE.get(sql,params,(err,row)=>{
+	DBASE.all(sql,params,(err,row)=>{
 		if(err){
 			res.status(400).json({error:err.message})
 			return
 		}
-				
-		res.json({message:`Afficher l'avis sur la région de ${userR} `,data:row})
+		console.log("longueur",row.length)
+		res.json({message:`Afficher les avis sur la région de ${userR} `,data:row})
 		
 	})
 		
 })
   
   
+  
+  
+  
+  
+ // Afficher les régions qui ont un avis donné
+
+app.get("/api/:avis",(req,res)=>{
+	const {region:userR}=req.params
+	const sql= "SELECT region FROM user WHERE avis = ?"
+	//console.log(sql);
+	const params=[userR]
+	DBASE.all(sql,params,(err,row)=>{
+		if(err){
+			res.status(400).json({error:err.message})
+			return
+		}
+		console.log("longueur",row.length)
+		res.json({message:`Afficher les regions qui ont un avis: ${userR} `,data:row})
+		
+	})
+		
+}) 
  app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     
   
