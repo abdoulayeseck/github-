@@ -4,7 +4,7 @@
  const fetch =require('node-fetch');
  const swaggerUi = require('swagger-ui-express');
  const swaggerDocument = require('./swagger.json');
- const db = require("./db.js");
+ const DBASE = require("./DBASE.js");
  const bodyParser = require('body-parser');
  app.use(bodyParser.json());
  
@@ -161,7 +161,7 @@
     
     
     
-  // creer un nouveau user
+  // POST /creer un nouveau user
  
  app.post("/api/user",(req,res)=>{
    var body = req.body;
@@ -175,14 +175,59 @@
    const sql= "INSERT INTO user(region,avis) VALUES(?,?)"
    const params= [user.region,user.avis]
    
-   db.run(sql,params,function(err,result){
-   //db.run('/'sql,params, (err, result) =>{
+   DBASE.run(sql,params,function(err,result){
+	if(err) console.log("error", err);
+	else res.send(`${this.lastID}`);
      });
-   res.json(body);
      
-     })  
+     })
     
   
+  
+  
+  
+  
+  
+  
+  // Afficher un user avec son id
+
+app.get("/api/user/:id",(req,res)=>{
+	const {id:userID}=req.params
+	const sql= "SELECT * FROM user WHERE id= ?"
+	const params=[userID]
+	DBASE.get(sql,params,(err,row)=>{
+		if(err){
+			res.status(400).json({error:err.message})
+			return
+		}
+				
+		res.json({message:`Afficher l'avis de l'utilisateur ${userID} sur la région`,data:row})
+		
+	})
+		
+})
+
+
+
+    
+  // Afficher un user avec la region
+
+app.get("/api/:region",(req,res)=>{
+	const {region:userR}=req.params
+	const sql= "SELECT a FROM user group by region having region = ?"
+	console.log(sql);
+	const params=[userR]
+	DBASE.get(sql,params,(err,row)=>{
+		if(err){
+			res.status(400).json({error:err.message})
+			return
+		}
+				
+		res.json({message:`Afficher l'avis sur la région de ${userR} `,data:row})
+		
+	})
+		
+})
   
   
  app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));

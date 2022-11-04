@@ -12,7 +12,7 @@ let db = new sqlite3.Database(dbFile,(err)=>{
 	}else{
 		console.log("Connexion a la base sqlite3")
 		
-		const sql ="CREATE TABLE user (region text,avis text)"
+		const sql ="CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT,region text,avis text)"
 		db.run(sql, (err)=>{
 			if (err){
 				console.log("table deja cree");
