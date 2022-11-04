@@ -226,7 +226,7 @@ app.get("/api/:region",(req,res)=>{
 			res.status(400).json({error:err.message})
 			return
 		}
-		console.log("longueur",row.length)
+		//console.log("longueur",row.length)
 		res.json({message:`Afficher les avis sur la région de ${userR} `,data:row})
 		
 	})
@@ -240,18 +240,18 @@ app.get("/api/:region",(req,res)=>{
   
  // Afficher les régions qui ont un avis donné
 
-app.get("/api/:avis",(req,res)=>{
-	const {region:userR}=req.params
-	const sql= "SELECT region FROM user WHERE avis = ?"
+app.get("/api/avis/:avis",(req,res)=>{
+	const {avis:userA}=req.params
+	const sql= "SELECT DISTINCT(region) FROM user WHERE avis = ?"
 	//console.log(sql);
-	const params=[userR]
+	const params=[userA]
 	DBASE.all(sql,params,(err,row)=>{
 		if(err){
 			res.status(400).json({error:err.message})
 			return
 		}
-		console.log("longueur",row.length)
-		res.json({message:`Afficher les regions qui ont un avis: ${userR} `,data:row})
+		//console.log("longueur",row.length)
+		res.json({message:`Afficher les regions qui ont un avis: ${userA} `,data:row})
 		
 	})
 		
