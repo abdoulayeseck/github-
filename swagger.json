@@ -77,6 +77,45 @@
                 }
               }
             }
+          },
+          "/api/user/:id": {
+            "get": {
+              "tags": ["/api/user/:id"],
+              "summary": "Permet de recuperer l'avis d'un utilisateur",
+              "responses": {
+                "300": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/api/user/:id"
+                  }
+                }
+              }
+            }
+          },
+          "/api/user": {
+            "post": {
+              "tags": ["Users"],
+              "description": "Creation d'un commentaite",
+              "parameters": [
+                {
+                  "name": "user",
+                  "in": "body",
+                  "description": "les commentaire creer par l'utilisateur",
+                  "schema": {
+                    "$ref": "#/definitions/api/user/:id"
+                  }
+                }
+              ],
+              "produces": ["application/json"],
+              "responses": {
+                "200": {
+                  "description": "Nouveau commentaire",
+                  "schema": {
+                    "$ref": "#/definitions/api/user/:id"
+                  }
+                }
+              }
+            }
           }
 
     },
@@ -166,6 +205,21 @@
           "nbre_logements_re": {
             "type": "number"
           }
+        }
+      },
+      "/api/user/:id": {
+        "required": [
+          "region",
+          "avis"
+        ],
+        "properties": {
+          "region": {
+            "type": "string"
+          },
+          "avis": {
+            "type": "string"
+          }
+          
         }
       }
     }
