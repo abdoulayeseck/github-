@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <meta charset="utf-8">
+        <title>forme</title>
+  </head>
+  <body>
+    <div class="contactez-nous">
+<h1> Donnez nous votre avis </h1>
+<p>Envoyez nous votre impression par rapport a la region, !</p>
+<form action="/" method="post">
+<div>
+<label for="nom">Votre nom</label>
+<input type="text" id="nom" name="nom" placeholder="Martin" required>
+</div>
+<div>
+<label for="email">Votre e-mail</label>
+<input type="email" id="email" name="email" placeholder="monadresse@mail.com" >
+</div>
+<div>
+<label for="sujet">Quel est le sujet de votre message ?</label>
+<select name="sujet" id="sujet" required>
+<option value="" disabled selected hidden>Choisissez le sujet de votre message</option>
+<option value="probleme-compte">Mot pour definir la region </option>
+<option value="question-produit">Qu'est ce qui vous a impressionné</option>
+<option value="suivi-commande">Monument le plus appreciés</option>
+<option value="autre">Autre...</option>
+</select>
+</div>
+<div>
+<label for="message">Votre message</label>
+<textarea id="message" name="message" placeholder="Bonjour, j'ai adoré...." required></textarea>
+</div>
+<div>
+<button type="submit">Envoyer mon message</button>
+</div>
+</form>
+</div>
+
+
+
+  </body>
+</html>
