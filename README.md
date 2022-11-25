@@ -45,6 +45,9 @@ Il contient 13 colonnes :
 - part_logement_sociaux_geresautres_bailleurs est la part de logements sociaux gérés par les autres bailleurs
 
 
+Qualité des données :
+
+Les données sont accessibles via un URL https://opendata.caissedesdepots.fr/explore/embed/dataset/bailleurs_sociaux_region/table/?sort=-part_logement_sociaux_geres_esh. Sur l'échelle de qualité des données proposée par Tim Berners Lee, cette base de données obtient 4 étoiles. Elle est disponible sans coût d'utilisation.
 
 Le second fichier xlsx obtenu à partir du lien https://www.insee.fr/fr/statistiques/5371235?sommaire=5371304 s'agit du niveau de vie et de pauvreté par région en 2018 communiqué par l'INSEE ainsi que les coordonnées géographiques récupérées de https://www.coordonnees-gps.fr/carte/pays/FR. Il comprend diverses colonnes :
 
@@ -57,6 +60,10 @@ Le second fichier xlsx obtenu à partir du lien https://www.insee.fr/fr/statisti
 - intensité de pauvreté est l'intensité de la pauvreté en % au sein de la région
 
 - latitude et longitude sont les coordonnées géographiques pour le centre de la région (l'idée était de créer une carte avec les informations du taux de pauvreté et le nombre de logements sociaux par régions avec Power BI)
+
+Qualité des données :
+
+Les données sont accessibles à partir d'un fichier xlsx ce qui diminue la qualité des données sur l'échelle proposée par Tim Berners Lee, cette base de données obtient 2 étoiles. Elle est disponible sans coût d'utilisation.
 
 
 Idées :
