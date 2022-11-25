@@ -71,3 +71,31 @@ Idées :
 -> Récupérer et Afficher le top 5 ou top 3 des prix minimums des logements sociaux
 
 -> Récupérer les informations liées au classement de pauvreté par région et observer un lien avec le nombre ou pourcentage de logements sociaux présents dans la région
+
+
+
+Descriptif des différents fichiers et du site web :
+
+
+En ce qui concerne la partie Serveur, elle contient deux types de requêtes : Les requêtes HTTP Get et les Post. 
+
+Les requêtes Get (4) contenues dans notre projet récupèrent les informations avec fetch grâce aux portes /prix_revient, /prixderevient_logement, /surface, /nombre_logement.
+
+Les requêtes Post (2) créées sont de deux types. Les premières utilisent Postman (cette application permet de tester des API pour la construction des requêtes) afin de saisir des informations. Les données sont enregistrées dans une base de données db.sqlite. Postman permet d'intégrer des informations.
+
+Le deuxième Post sont intégrés au site web et renseignent les informations côté client grâce à /savecontact. Celles-ci sont ajoutées dans le fichier data.json. 
+
+
+CONCEPTION DU SITE WEB
+
+Pour ce projet, un site web a été conçu. Pour ce faire, le code utilisé est composé de codes html, css pour la mise en forme, boostrap (pour le design du site avec l'utilisation de carousel) présents dans le fichier index.html (côté client) et chart.js (librairie javascript pour les diagrammes en barres, circulaire) inclus dans index.js.
+
+Index.js est réalisé pour le côté client. Il envoie les requêtes au serveur.  En accédant aux portes, il est possible de récupérer des informations et ceci est possible grâce à la fonction requestGet. La fonction requestPost revient à recevoir le post c'est-à-dire par exemple lorsque les commentaires sont entrés, cette fonction parse les données et les envoie au serveur. Les données récupérées sont intégrées dans le fichier data.json qui a préalablement été créé.
+L'API est à la fois pour le côté serveur et le client.
+
+Les portes définies côté serveur comme FilterhttpResponse récupèrent les informations du serveur et les affichent sur le site web.
+
+DESCRIPTION DU SITE WEB
+
+Au niveau descriptif, le site web contient un descriptif avec des renseignements sur les logements sociaux et les chiffres clés des logements HLM. Dans la section Our Projects, il est possible de visualiser plusieurs graphiques dont des diagrammes en barres de la surface moyenne au m². Ceci est rendu disponible grâce à chart.js. La section Our Team présente les membres de l'équipe. Puis dans Contact Us, l'utilisateur peut fournir son avis, laisser un commentaire sur la région de son choix. Il communique ainsi son nom, son e-mail et un commentaire (côté client).
+
