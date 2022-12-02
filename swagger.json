@@ -39,6 +39,7 @@
         "/Logement/:region": {
             "get": {
               "tags": ["Logement/:region"],
+              "parameters":"region",
               "summary": "Renseigne les offre de logement sociales en fonction de la region souhaite",
               "responses": {
                 "300": {
@@ -50,6 +51,23 @@
               }
             }
           },
+          "/ville/:nom_ville": {
+            "get": {
+              "tags": ["ville/:nom_ville"],
+              "parameters":[{"nom_ville":"ville"}],
+              "summary": "Renseigne les informations sur une ville, ces données proviennent du projet de nos collegues",
+              "responses": {
+                "300": {
+                  "description": "OKK",
+                  "schema": {
+                    "$ref": "#/definitions/Logement/:region"
+                  }
+                }
+              }
+            }
+          },
+
+
           "/Prix_max": {
             "get": {
               "tags": ["Prix_max"],
