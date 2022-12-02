@@ -60,7 +60,7 @@
                 "300": {
                   "description": "OKK",
                   "schema": {
-                    "$ref": "#/definitions/Logement/:region"
+                    "$ref": "#/definitions/ville/:nom_ville"
                   }
                 }
               }
@@ -181,6 +181,24 @@
           },
           "construction_prixderevient_logement": {
             "type": "number"
+          }
+        }
+      },
+
+      "ville/:nom_ville": {
+        "required": ["nom_ville",
+        "convoit","commentaitre"
+        ],
+        "params":["nom_ville"],
+        "properties": {
+          "nom_ville": {
+            "type": "string"
+          },
+          "convoit": {
+            "type": "string"
+          },
+          "commentaites": {
+            "type": "string"
           }
         }
       },
