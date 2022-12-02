@@ -2,11 +2,8 @@
  const cors = require('cors');
  const express = require('express');
  const app = express();
- const mongoose = require('mongoose');
  const bodyParser = require('body-parser');
  const fs = require('fs');
-
- const app = express();
  const fetch =require('node-fetch');
  const swaggerUi = require('swagger-ui-express');
  const swaggerDocument = require('./swagger.json');
@@ -27,8 +24,6 @@ app.use(bodyParser.json());
  
   // serveur
   
-  
-  // 2eme fichier 
     
     
     
@@ -133,8 +128,6 @@ app.get("/api/avis/:avis",(req,res)=>{
  app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     
   
- 
-  
 // deuxieme partie avec le fonctionnement du site web
 const corsOption = {
     origins: 'localhost',
@@ -149,33 +142,6 @@ app.use(cors(corsOption));
 
 
 
- // Database
-
- const database = (module.exports = () => {
-  const connectionParams ={
-      UseNewUrlparser:true,
-      UseUnifiedTopology:true,
-  };
-   try{
-    mongoose.connect("mongodb+srv://elhadj:122455@cluster0.iuvslvq.mongodb.net/open_data?retryWrites=true&w=majority");
-    console.log("database connected succesfully");
-   } catch(error){
-    console.log(error);
-    console.log("database connection failed");
-   }
- });
-
- // create data schema
- /*
- const formulaire = {
-  nom : String,
-  e_mail : String,
-  message: String
-
- }
-
- const Note = mongoose.model("formulaire",formulaire);
- */
 var data = fs.readFileSync('data.json');
 var myObject= JSON.parse(data);
 
@@ -441,10 +407,25 @@ app.get('/prixderevient_logement', function(request, response){
            
    
    })
-   
-   
+
+ // Api groupe 
+ app.get('/ville/:nom_ville', function(request, response){
+      const ville = request.params.nom_ville;   
+
+       fetch(`https://villeeco.osc-fr1.scalingo.io/ville-eco/${ville}`)
+       //fetch("https://villeeco.osc-fr1.scalingo.io/ville-eco/Montpellier")
+           .then(res => res.json())
+           .then(json => { 
+            response.json(json);
+            //console.log(ville);
+           });
+           
+   })
+
+
  
-database();
+   
+   
  app.listen(PORT,()=>{
      console.log('serveur en marche ');
  })
