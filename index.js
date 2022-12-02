@@ -15,7 +15,7 @@
   
 app.use(bodyParser.json());
  app.get('/', (req,res) => {
-      res.json({test : "Bienvenue a l'application des Logements Sociaux"});
+      res.json({test : "Bienvenue a l'application des Logements Sociaux, aller sur /api-docs pour la documentation de notre api et nos differents roots"});
   })
   
   
